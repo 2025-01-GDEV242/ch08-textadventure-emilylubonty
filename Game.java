@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Item roomItems; 
         
     /**
      * Create the game and initialise its internal map.
@@ -40,7 +41,7 @@ public class Game
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
+        lab = new Room("in a science lab");
         office = new Room("in the computing admin office");
         cafeteria = new Room ("in the campus cafeteria"); 
         confrence = new Room ("in the confrence room"); 
@@ -70,6 +71,16 @@ public class Game
 
         currentRoom = outside;  // start game outside
     }
+    
+    public void createItems()
+    {
+        Item raincoat, laptop, latte, frog, documents, sandwich, table, gold; 
+        
+        raincoat = new Item("There is a raincoat on the ground."); 
+        
+        
+    }
+    
 
     /**
      *  Main play routine.  Loops until end of play.

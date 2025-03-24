@@ -20,6 +20,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private HashMap<String, Item> items; 
 
     /**
      * Create a room described "description". Initially, it has
@@ -41,6 +42,11 @@ public class Room
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
+    }
+    
+    public void setItem()
+    {
+        items = new HashMap<>();
     }
 
     /**
