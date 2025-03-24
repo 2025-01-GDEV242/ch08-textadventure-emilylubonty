@@ -51,13 +51,20 @@ public class Game
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.setExit("north", cafeteria); 
 
-        theater.setExit("west", outside);
+        theater.setExit("west", tunnel);
 
         pub.setExit("east", outside);
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        
+        confrence.setExit("south", pub); 
+        
+        cafeteria.setExit("west", confrence); 
+        
+        tunnel.setExit("east", outside); 
 
         office.setExit("west", lab);
 
