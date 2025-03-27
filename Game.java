@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Item roomItems; 
+    private Item item; 
         
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +27,7 @@ public class Game
     public Game() 
     {
         createRooms();
+        createItem();
         parser = new Parser();
     }
 
@@ -50,6 +51,8 @@ public class Game
         
         // initialise room exits
         outside.setExit("east", theater);
+        
+        
         outside.setExit("south", lab);
         outside.setExit("west", pub);
         outside.setExit("north", cafeteria); 
@@ -72,11 +75,20 @@ public class Game
         currentRoom = outside;  // start game outside
     }
     
-    public void createItems()
+    public void createItem()
     {
         Item raincoat, laptop, latte, frog, documents, sandwich, table, gold; 
         
-        raincoat = new Item("There is a raincoat on the ground."); 
+        raincoat = new Item("a yellow raincoat on the chair"); 
+        laptop = new Item("an unassuming laptop with Word open on the table");
+        latte = new Item("a spilled drink on the floor"); 
+        frog = new Item("a frog that is looking to escape it's fate by the window");
+        documents = new Item("a pile of documents regarding school policies on the desk");
+        sandwich = new Item("an untouched sandwich behind the counter"); 
+        gold = new Item("a block of gold fitted into the wall"); 
+        
+        
+        
         
         
     }
