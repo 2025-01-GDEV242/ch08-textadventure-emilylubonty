@@ -19,14 +19,14 @@ public class Item
      */
     public Item(String itemDescription)
     {
-        this.itemDescription = itemDescription; 
+        this.itemDescription = itemDescription;  
         this.itemWeight = itemWeight; 
         items = new HashMap<>(); 
     }
-
-    public void setRoomItem(String description, Item name)
+    
+    public void setWeight(String itemWeight, Item item)
     {
-        items.put(description, name); 
+        items.put(itemWeight, item); 
     }
     
     /**
@@ -45,11 +45,15 @@ public class Item
         return itemWeight;
     }
     
-    private String getLongDescription()
+    public String getShortDescription()
+    {
+        return itemDescription;
+    }
+    
+    public String getLongDescription()
     {
         return "There is " + itemDescription + ".\n" + getItemString();
     }
-    
     
     private String getItemString()
     {
