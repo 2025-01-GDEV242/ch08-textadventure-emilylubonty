@@ -11,14 +11,15 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Emily Lubonty
+ * @version 3-29-2025
  */
 
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Room currentRoom; 
+    private Item currentItem; 
         
     /**
      * Create the game and initialise its internal map.
@@ -26,6 +27,7 @@ public class Game
     public Game() 
     {
         createRooms();
+        createItems(); 
         parser = new Parser();
     }
 
@@ -34,32 +36,76 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, cafeteria, confrence, tunnel;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
+        lab = new Room("in a science lab");
         office = new Room("in the computing admin office");
+        cafeteria = new Room ("in the campus cafeteria"); 
+        confrence = new Room ("in the confrence room"); 
+        tunnel = new Room ("in the campus' secret tunnel"); 
+        
         
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.setExit("north", cafeteria); 
 
-        theater.setExit("west", outside);
+        theater.setExit("west", tunnel);
 
         pub.setExit("east", outside);
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        
+        confrence.setExit("south", pub); 
+        
+        cafeteria.setExit("west", confrence); 
+        
+        tunnel.setExit("east", outside);
 
         office.setExit("west", lab);
 
         currentRoom = outside;  // start game outside
+        
+        
+        
     }
-
+    
+    /**
+     * Creates items to be added to rooms. 
+     */
+    private void createItems()
+    {
+        Item raincoat, laptop, latte, frog, documents, sandwich, chips, gold; 
+        
+        // create new items
+        raincoat = new Item("a yellow raincoat on the bench");
+        chips = new Item("a dozen poker chips stacked neatly on the counter");
+        laptop = new Item("an unassuming laptop with Word open on the table");
+        latte = new Item("a spilled drink on the floor"); 
+        frog = new Item("a frog that is looking to escape it's fate by the window");
+        documents = new Item("a pile of documents regarding school policies on the desk");
+        sandwich = new Item("an untouched sandwich behind the counter"); 
+        gold = new Item("a block of gold fitted into the wall");  
+        
+        // item weights
+        raincoat.setWeight(14, raincoat);
+        chips.setWeight(4, chips); 
+        laptop.setWeight(600, laptop); 
+        latte.setWeight(50, latte);
+        frog.setWeight(1000, frog); 
+        documents.setWeight(70000, documents); 
+        sandwich.setWeight(121, sandwich); 
+        gold.setWeight(100, gold); 
+    
+        currentItem = raincoat; // begin game with raincoat
+    }
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -71,7 +117,7 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+    while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -114,10 +160,18 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case BACK:
+                previousRoom(command);
+                break; 
 
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+            
+            case LOOK:
+                look(command);
+                break; 
         }
         return wantToQuit;
     }
@@ -149,7 +203,7 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+    
         String direction = command.getSecondWord();
 
         // Try to leave current room.
@@ -159,11 +213,54 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
+           currentRoom = nextRoom;
+           System.out.println(currentRoom.getLongDescription());
+        }
+    }
+    
+    /**
+     * Sends player to the previous room they were in. If there is no exit an
+     * error message is printed. 
+     */
+    private void previousRoom(Command command)
+    {
+        String direction = command.getSecondWord();
+        Room backRoom = currentRoom.getExit(direction);
+        CommandWord commandWord = command.getCommandWord();
+        
+        if (command.hasSecondWord()){
+           System.out.println("Invalid command.");
+           return;
+        }
+        if (backRoom != null){
+            if (direction.equals("east")){
+            currentRoom = currentRoom.getExit("east"); 
+            }
+            if (direction.equals("west")){
+            currentRoom = currentRoom.getExit("west"); 
+            }
+            if (direction.equals("south")){
+            currentRoom = currentRoom.getExit("south"); 
+            }
+            if (direction.equals("north")){
+            currentRoom = currentRoom.getExit("north"); 
+            }
+
             System.out.println(currentRoom.getLongDescription());
+        }
+        else{
+            System.out.println("There is nothing to return to.");
         }
     }
 
+    /**
+     * Allows player to view their current surroundings. 
+     */
+    private void look(Command command)
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
