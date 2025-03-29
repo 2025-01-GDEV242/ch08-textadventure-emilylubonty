@@ -2,14 +2,16 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.Iterator; 
 /**
- * Write a description of class Item here.
+ * Class Item - Creates items to be found within rooms in the game.
+ * 
+ * This class creates items to be used in the "World of Zuul" game. The items
+ * are assigned to rooms and players can pick up the item(s). 
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Emily Lubonty
+ * @version 3-29-2025
  */
 public class Item
 {
-    // instance variables - replace the example below with your own
     private String itemDescription;
     private String itemWeight; 
     private HashMap<String, Item> items;
@@ -24,37 +26,57 @@ public class Item
         items = new HashMap<>(); 
     }
     
+    /**
+     * Sets the item's weight. 
+     * @param itemWeight the item's weight
+     */
     public void setWeight(String itemWeight, Item item)
     {
         items.put(itemWeight, item); 
     }
     
+    
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * The item's description.
+     * 
+     * @return returns the item's description.
      */
     public String getItemDescription()
     {
         return itemDescription;
     }
     
+    /**
+     * The item's weight.
+     * 
+     * @return returns the item's weight.
+     */
     public String getItemWeight()
     {
         return itemWeight;
     }
     
+    /**
+     * @return returns the short description of the item
+     */
     public String getShortDescription()
     {
         return itemDescription;
     }
     
+    /**
+     * @return returns the description of the item in the format of a string. 
+     * 
+     */
     public String getLongDescription()
     {
         return "There is " + itemDescription + ".\n" + getItemString();
     }
     
+    /**
+     * Returns the details of the items.
+     * @return returns information regarding the items.
+     */
     private String getItemString()
     {
         String returnString = "Items: ";

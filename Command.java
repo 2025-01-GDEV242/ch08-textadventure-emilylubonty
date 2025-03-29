@@ -11,10 +11,11 @@
  * command words. If the user entered an invalid command (a word that is not
  * known) then the CommandWord is UNKNOWN.
  *
- * If the command had only one word, then the second word is <null>.
+ * If the command had only one word, then the second word is <null>, except
+ * in the case of the "back" and "look" commands being used. 
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Emily Lubonty
+ * @version 3-29-2025
  */
 
 public class Command
@@ -59,6 +60,14 @@ public class Command
     public boolean isUnknown()
     {
         return (commandWord == CommandWord.UNKNOWN);
+    }
+    
+    /**
+     * @return true if the command is "look". 
+     */
+    public boolean isLook()
+    {
+        return (commandWord == CommandWord.LOOK);
     }
 
     /**

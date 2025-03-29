@@ -1,5 +1,6 @@
 import java.util.Set;
 import java.util.HashMap;
+import java.util.ArrayList; 
 import java.util.Iterator;
 
 /**
@@ -12,14 +13,15 @@ import java.util.Iterator;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Emily Lubonty
+ * @version 3-29-2025
  */
 
 public class Room 
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private ArrayList<Item> roomItems; 
     
     /**
      * Create a room described "description". Initially, it has
@@ -44,7 +46,18 @@ public class Room
         exits.put(direction, neighbor);
     }
 
-
+    /**
+     * Adds items to rooms. 
+     * @param roomItems The list of items to be added to the rooms.
+     * @return returns items to rooms.
+     */
+    public ArrayList addItems(Item items)
+    {
+        ArrayList<Item> roomItems = new ArrayList<>();
+        roomItems.add(items);
+        return roomItems; 
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -90,5 +103,6 @@ public class Room
     {
         return exits.get(direction);
     }
+    
 }
 

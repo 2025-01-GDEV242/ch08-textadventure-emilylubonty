@@ -11,8 +11,8 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Emily Lubonty
+ * @version 3-29-2025
  */
 
 public class Game 
@@ -27,6 +27,7 @@ public class Game
     public Game() 
     {
         createRooms();
+        createItems(); 
         parser = new Parser();
     }
 
@@ -75,6 +76,9 @@ public class Game
         
     }
     
+    /**
+     * Creates items to be added to rooms. 
+     */
     private void createItems()
     {
         Item raincoat, laptop, latte, frog, documents, sandwich, chips, gold; 
@@ -89,6 +93,7 @@ public class Game
         sandwich = new Item("an untouched sandwich behind the counter"); 
         gold = new Item("a block of gold fitted into the wall");  
         
+        // item weights
         raincoat.setWeight("1lb", raincoat);
         chips.setWeight("2oz", chips); 
         laptop.setWeight("5lbs", laptop); 
@@ -98,12 +103,7 @@ public class Game
         sandwich.setWeight("6oz", sandwich); 
         gold.setWeight("100lbs", gold); 
     
-    }
-
-    private void addItems(Room exits, Item items)
-    {
-        
-        
+        currentItem = raincoat; // begin game with raincoat
     }
     
     /**
@@ -117,7 +117,7 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+    while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -135,7 +135,6 @@ public class Game
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
-        System.out.println(currentItem.getLongDescription()); 
     }
 
     /**
@@ -161,10 +160,18 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case BACK:
+                previousRoom(command);
+                break; 
 
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+            
+            case LOOK:
+                look(command);
+                break; 
         }
         return wantToQuit;
     }
@@ -196,7 +203,7 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+    
         String direction = command.getSecondWord();
 
         // Try to leave current room.
@@ -206,12 +213,43 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
+           currentRoom = nextRoom;
+           System.out.println(currentRoom.getLongDescription());
+        }
+    }
+    
+    /**
+     * Sends player to the previous room they were in. If there is no exit an
+     * error message is printed. 
+     */
+    private void previousRoom(Command command)
+    {
+        String direction = command.getSecondWord();
+        Room backRoom = currentRoom.getExit(direction);
+        CommandWord commandWord = command.getCommandWord();
+        
+        if (command.hasSecondWord()){
+           System.out.println("Invalid command.");
+           return;
+        }
+        if (backRoom != null){
+            currentRoom = backRoom; 
+            
             System.out.println(currentRoom.getLongDescription());
-            System.out.println(currentItem.getLongDescription()); 
+        }
+        else{
+            System.out.println("There is nothing to return to.");
         }
     }
 
+    /**
+     * Allows player to view their current surroundings. 
+     */
+    private void look(Command command)
+    {
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
