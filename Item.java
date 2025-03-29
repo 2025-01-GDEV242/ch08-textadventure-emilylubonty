@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class Item
 {
     private String itemDescription;
-    private String itemWeight; 
+    private int itemWeight; 
     private HashMap<String, Item> items;
 
     /**
@@ -30,9 +30,9 @@ public class Item
      * Sets the item's weight. 
      * @param itemWeight the item's weight
      */
-    public void setWeight(String itemWeight, Item item)
+    public void setWeight(int itemWeight, Item items)
     {
-        items.put(itemWeight, item); 
+        items.put(itemWeight, items); 
     }
     
     
@@ -51,7 +51,7 @@ public class Item
      * 
      * @return returns the item's weight.
      */
-    public String getItemWeight()
+    public int getItemWeight()
     {
         return itemWeight;
     }
@@ -86,6 +86,10 @@ public class Item
             returnString += " " + item;
         }
         return returnString; 
+    }
+    
+    public Item getItem(String itemDescription){
+        return items.get(itemDescription); 
     }
     
 }

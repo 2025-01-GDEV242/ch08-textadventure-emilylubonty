@@ -94,14 +94,14 @@ public class Game
         gold = new Item("a block of gold fitted into the wall");  
         
         // item weights
-        raincoat.setWeight("1lb", raincoat);
-        chips.setWeight("2oz", chips); 
-        laptop.setWeight("5lbs", laptop); 
-        latte.setWeight("4oz", latte);
-        frog.setWeight("8oz", frog); 
-        documents.setWeight("8lbs", documents); 
-        sandwich.setWeight("6oz", sandwich); 
-        gold.setWeight("100lbs", gold); 
+        raincoat.setWeight(14, raincoat);
+        chips.setWeight(4, chips); 
+        laptop.setWeight(600, laptop); 
+        latte.setWeight(50, latte);
+        frog.setWeight(1000, frog); 
+        documents.setWeight(70000, documents); 
+        sandwich.setWeight(121, sandwich); 
+        gold.setWeight(100, gold); 
     
         currentItem = raincoat; // begin game with raincoat
     }
@@ -233,8 +233,19 @@ public class Game
            return;
         }
         if (backRoom != null){
-            currentRoom = backRoom; 
-            
+            if (direction.equals("east")){
+            currentRoom = currentRoom.getExit("east"); 
+            }
+            if (direction.equals("west")){
+            currentRoom = currentRoom.getExit("west"); 
+            }
+            if (direction.equals("south")){
+            currentRoom = currentRoom.getExit("south"); 
+            }
+            if (direction.equals("north")){
+            currentRoom = currentRoom.getExit("north"); 
+            }
+
             System.out.println(currentRoom.getLongDescription());
         }
         else{
