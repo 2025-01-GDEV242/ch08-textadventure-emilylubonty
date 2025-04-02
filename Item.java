@@ -14,7 +14,7 @@ public class Item
 {
     private String itemDescription;
     private int itemWeight; 
-    private HashMap<String, Item> items;
+    private HashMap<Integer, Item> items;
 
     /**
      * Constructor for objects of class Item
@@ -28,9 +28,10 @@ public class Item
     
     /**
      * Sets the item's weight. 
-     * @param itemWeight the item's weight
+     * @param itemWeight The item's weight
+     * @param items The item's value
      */
-    public void setWeight(int itemWeight, Item items)
+    public void setWeight(Integer itemWeight, Item items)
     {
         items.put(itemWeight, items); 
     }
