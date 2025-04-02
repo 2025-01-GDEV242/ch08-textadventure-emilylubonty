@@ -3,3 +3,5 @@ Elements Implemented:
 1. Added items to the game
 2. Created the back command
 3. Created the Player class
+4. Added "look" command
+5. Added main method, allowing game to be played outside of BlueJ
