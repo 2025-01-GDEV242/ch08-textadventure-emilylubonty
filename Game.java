@@ -84,27 +84,27 @@ public class Game
         Item raincoat, laptop, latte, frog, documents, sandwich, chips, gold; 
         
         // create new items
-        raincoat = new Item("a yellow raincoat on the bench");
-        chips = new Item("a dozen poker chips stacked neatly on the counter");
-        laptop = new Item("an unassuming laptop with Word open on the table");
-        latte = new Item("a spilled drink on the floor"); 
-        frog = new Item("a frog that is looking to escape it's fate by the window");
-        documents = new Item("a pile of documents regarding school policies on the desk");
-        sandwich = new Item("an untouched sandwich behind the counter"); 
-        gold = new Item("a block of gold fitted into the wall");  
+        raincoat = new Item();
+        chips = new Item();
+        laptop = new Item();
+        latte = new Item(); 
+        frog = new Item();
+        documents = new Item();
+        sandwich = new Item(); 
+        gold = new Item();  
         
-        // item weights
-        raincoat.setWeight(14, raincoat);
-        chips.setWeight(4, chips); 
-        laptop.setWeight(600, laptop); 
-        latte.setWeight(50, latte);
-        frog.setWeight(1000, frog); 
-        documents.setWeight(70000, documents); 
-        sandwich.setWeight(121, sandwich); 
-        gold.setWeight(100, gold); 
+        raincoat.setItem("a yellow raincoat on the bench", 1);
+        chips.setItem("a dozen poker chips stacked neatly on the counter", 4); 
+        laptop.setItem("an unassuming laptop with Word open on the table", 600); 
+        latte.setItem("a spilled drink on the floor", 50);
+        frog.setItem("a frog that is looking to escape it's fate by the window", 1000); 
+        documents.setItem("a pile of documents regarding school policies on the desk", 6000); 
+        sandwich.setItem("an untouched sandwich behind the counter", 13); 
+        gold.setItem("a block of gold fitted into the wall", 777); 
     
         currentItem = raincoat; // begin game with raincoat
     }
+    
     
     /**
      *  Main play routine.  Loops until end of play.
@@ -172,6 +172,10 @@ public class Game
             case LOOK:
                 look(command);
                 break; 
+                
+            case PICKUP:
+                pickup(command);
+                break;
         }
         return wantToQuit;
     }
@@ -259,6 +263,11 @@ public class Game
     private void look(Command command)
     {
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void pickup(Command command)
+    {
+        System.out.println("You have picked up the item."); 
     }
     
     /** 

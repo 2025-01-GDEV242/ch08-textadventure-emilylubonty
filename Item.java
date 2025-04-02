@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Iterator; 
+
 /**
  * Class Item - Creates items to be found within rooms in the game.
  * 
@@ -13,27 +14,30 @@ import java.util.Iterator;
 public class Item
 {
     private String itemDescription;
-    private int itemWeight; 
-    private HashMap<Integer, Item> items;
-
+    private Integer itemWeight; 
+    private HashMap<String, Integer> items;
+    
+    
     /**
      * Constructor for objects of class Item
      */
-    public Item(String itemDescription)
+    public Item()
     {
         this.itemDescription = itemDescription;  
         this.itemWeight = itemWeight; 
         items = new HashMap<>(); 
     }
     
+    
+    
     /**
      * Sets the item's weight. 
-     * @param itemWeight The item's weight
+     * @param itemWeight the item's weight
      * @param items The item's value
      */
-    public void setWeight(Integer itemWeight, Item items)
+    public void setItem(String itemDescription, Integer itemWeight)
     {
-        items.put(itemWeight, items); 
+        items.put(itemDescription, itemWeight); 
     }
     
     
@@ -52,7 +56,7 @@ public class Item
      * 
      * @return returns the item's weight.
      */
-    public int getItemWeight()
+    public Integer getItemWeight()
     {
         return itemWeight;
     }
@@ -89,8 +93,6 @@ public class Item
         return returnString; 
     }
     
-    public Item getItem(String itemDescription){
-        return items.get(itemDescription); 
-    }
+    
     
 }

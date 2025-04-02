@@ -1,30 +1,37 @@
 
-/**
- * Write a description of class Player here.
+/** 
+ * The Player class defines what room the Player is currently located in.
+ * It also allows the player to pick up items or drop them if the item is too 
+ * heavy to carry.
  *
  * @author Emily Lubonty
  * @version 3-29-2025
  */
 public class Player
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    
     /**
      * Constructor for objects of class Player
      */
     public Player()
     {
-        // initialise instance variables
-        x = 0;
+        
+        
     }
 
     /**
-     
+     * Allows the player to pick up items. 
      */
-    public int sampleMethod(int y)
+    public void pickUpItem(Room roomItems)
     {
-        // put your code here
-        return x + y;
+        
+    }
+    
+    /**
+     * Allows the player to drop items if they are too heavy. 
+     */
+    public void dropItem(Room roomItems)
+    {
+        
     }
 }

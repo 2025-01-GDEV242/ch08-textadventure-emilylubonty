@@ -1,0 +1,5 @@
+Elements Implemented: 
+
+1. Added items to the game
+2. Created the back command
+3. Created the Player class
